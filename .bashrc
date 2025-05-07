@@ -1,16 +1,19 @@
-# just
-command -v just || curl --proto '=https' --tlsv1.2 -sSfk https://just.systems/install.sh | bash -s -- -f --to $HOME/.local/bin
+if [ -d "$HOME/.local/bin" ] && [[ ":$PATH:" != *":$HOME/.local/bin:"* ]]; then
+    export PATH="$HOME/.local/bin:$PATH"
+fi
 
 # uv
-command -v uv || curl -LsSf https://astral.sh/uv/install.sh | sh
-. "$HOME/.local/env"
+if [ -f "$HOME/.local/env" ]; then
+    . "$HOME/.local/env"
+fi
 
 # starship
-command -v starship || curl -sS https://starship.rs/install.sh | sh -s -- --bin-dir $HOME/.local/bin -y
-eval "$(starship init bash)"
+if command -v starship >/dev/null 2>&1; then
+    eval "$(starship init bash)"
+fi
 
 # autoenv
-test -f ~/.autoenv/activate.sh || curl -#fLo- 'https://raw.githubusercontent.com/hyperupcall/autoenv/master/scripts/install.sh' | sh
 export AUTOENV_ASSUME_YES='yes'
-
-alias wl='$HOME/log-work.sh'
+if [ -f "$HOME/.autoenv/activate.sh" ]; then
+    . "$HOME/.autoenv/activate.sh"
+fi
