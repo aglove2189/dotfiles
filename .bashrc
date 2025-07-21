@@ -12,8 +12,7 @@ if command -v starship >/dev/null 2>&1; then
     eval "$(starship init bash)"
 fi
 
-# autoenv
-export AUTOENV_ASSUME_YES='yes'
-if [ -f "$HOME/.autoenv/activate.sh" ]; then
-    . "$HOME/.autoenv/activate.sh"
+# direnv
+if command -v direnv >/dev/null 2>&1; then
+    eval "$(direnv hook bash)"
 fi
