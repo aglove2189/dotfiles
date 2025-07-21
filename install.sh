@@ -32,10 +32,10 @@ else
     echo "starship is already installed."
 fi
 
-# autoenv
-if [ ! -f "$HOME/.autoenv/activate.sh" ]; then
-    echo "Installing autoenv..."
-    curl -#fLo- 'https://raw.githubusercontent.com/hyperupcall/autoenv/master/scripts/install.sh' | sh
+# direnv
+if ! command -v direnv >/dev/null 2>&1; then
+    echo "Installing direnv..."
+    curl -sfL https://direnv.net/install.sh | bash
 else
-    echo "autoenv is already installed."
+    echo "direnv is already installed."
 fi
